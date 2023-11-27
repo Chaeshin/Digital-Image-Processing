@@ -187,19 +187,20 @@ namespace ImageProcessing
             label2.Text = "Front";
             label1.Text = "Background";
         }
-        private Device selectedDevice;
+        Device[] Device = DeviceManager.GetAllDevices();
         private void openToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            Device[] devices = DeviceManager.GetAllDevices();
-            if (devices.Length > 0)
+            if (Device.Length > 0)
             {
-                selectedDevice = DeviceManager.GetDevice(0);
-                selectedDevice.ShowWindow(pictureBox1);
+                Device d = DeviceManager.GetDevice(0);
+                d.ShowWindow(pictureBox1);
             }
-            else
-            {
-                MessageBox.Show("No webcam device found.");
-            }
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Device d = DeviceManager.GetDevice(0);
+            d.Stop();
         }
 
         /*private void brightnessToolStripMenuItem_Click(object sender, EventArgs e)
